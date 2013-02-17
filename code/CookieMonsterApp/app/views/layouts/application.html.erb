@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>CookieMonsterApp</title>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+<header>
+  <nav>
+    <%= link_to "Home", root_url %> |
+    <% if @current_user.blank? %>
+      <%= link_to "Sign Up", new_user_url %> |
+      <%= link_to "Sign In", login_url %> |
+    <% else %>
+      <%= link_to "Sign Out", logout_url %>
+    <% end %>
+  </nav>
+</header>
+<% if @current_user %>
+  <p>Hello, <%= @current_user.name %></p>
+<% end %>
+<%= flash[:notice] %>
+
+<%= yield %>
+
+</body>
+</html>
